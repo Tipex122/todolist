@@ -42,10 +42,32 @@
               <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
             </li>
             -->
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">About</a>
-            </li>
-            {% if request.user.is_authenticated %}
+             {% if request.user.is_authenticated %}
+
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'category_new' %}">New category</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'categories_list' %}">List of Categories <span class="sr-only">(current)</span></a>
+              </li>
+
+              <li class="nav-item">
+                  <a class="nav-link disabled" href="#">Disabled</a>
+              </li>
+
+              <span>
+                  <!-- Manque quelque chose pour bien aligner en vertical les menus items -->
+                  <a class="nav-link" href="{% url 'todo_new' %}">
+                      <button type="button" class="btn btn-primary">
+                          <span class="fa fa-plus-circle fa-lg" aria-hidden="true"></span>
+                      </button>
+                  </a>
+              </span>
+              <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+
               <li class="nav-item">
                 {# URL provided by django-allauth/account/urls.py #}
                 <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>
@@ -64,6 +86,11 @@
                 <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
               </li>
             {% endif %}
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about' %}">About</a>
+            </li>
+
           </ul>
         </div>
       </nav>

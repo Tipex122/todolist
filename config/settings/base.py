@@ -56,6 +56,7 @@ LOCAL_APPS = [
     # custom users app
     'TodoList.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'todos.apps.TodosConfig',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

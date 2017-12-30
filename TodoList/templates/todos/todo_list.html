@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if nbr %}
+    {% for todo in todos %}
+        {% if todo.is_finished %}
+        <div class="card">
+            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+            <h3 class="card-header">
+                <strong><font color="SlateGray">{{todo.category}}</font></strong>
+            </h3>
+            <div class="card-block">
+                <font color="Grey">
+                    <h4 class="card-title">
+                        <b>{{ todo.todo_job }}</b>
+                        <a class="btn btn-default" href="{% url 'todo_edit' pk=todo.pk %}"><i class="fa fa-pencil-square-o fa-2x"></i></a>
+                        <a class="btn btn-default" href="{% url 'todo_checked' pk=todo.pk %}"><i class="fa fa-check-square fa-2x"></i></a>
+                    </h4>
+
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        <i>{{ todo.created_date }}</i>
+                    </h6>
+                    <hr>
+                    <p class="card-text">{{ todo.todo_job_detail | linebreaksbr }}</p>
+                </font>
+            </div>
+        </div>
+        {% else %}
+        <div class="card">
+            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+            <h3 class="card-header">
+                <strong><font color="Teal">{{todo.category}}</font></strong>
+            </h3>
+            <div class="card-block">
+                <h4 class="card-title">
+                    <b>{{ todo.todo_job }}</b>
+                    <a class="btn btn-default" href="{% url 'todo_edit' pk=todo.pk %}"><i class="fa fa-pencil-square-o fa-2x"></i></a>
+                    <a class="btn btn-default" href="{% url 'todo_checked' pk=todo.pk %}"><i class="fa fa-check-square-o fa-2x"></i></a>
+                </h4>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    <i>{{ todo.created_date }}</i>
+                </h6>
+                <hr>
+                <p class="card-text">{{ todo.todo_job_detail | linebreaksbr }}</p>
+            </div>
+        </div>
+        {% endif %}
+        <p></p>
+    {% endfor %}
+    {% else %}
+        <p>There is no Todo for you in this category</p>
+    {% endif %}
+{% endblock %}

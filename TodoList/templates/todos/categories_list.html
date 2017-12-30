@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Edit</th>
+                <th>Extract</th>
+            </tr>
+        </thead>
+        {% for category in categories %}
+            <tbody>
+                <tr>
+                    <th scope="row">{{category.pk}}</th>
+                    <td>{{category}}</td>
+                    <td>
+                        <a class="btn btn-default" href="{% url 'category_edit' pk=category.pk %}"><i class="fa fa-pencil-square-o fa-2x"></i></a>
+                    </td>
+                    <td>
+                        <a class="btn btn-default" href="{% url 'todo_list_by_category' pk=category.pk %}"><i class="fa fa-list fa-2x"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+
+{% endblock %}
