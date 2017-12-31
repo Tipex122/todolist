@@ -21,6 +21,8 @@ def category_new(request):
         form = CategoryForm(request.POST)
         if form.is_valid():
             category = form.save(commit=False)
+            category.user = request.user
+            category.created_date = timezone.now()
             category.save()
             return redirect('categories_list')
     else:
@@ -36,8 +38,8 @@ def category_edit(request, pk):
         form = CategoryForm(request.POST, instance=post)
         if form.is_valid():
             category = form.save(commit=False)
-            # category.user = request.user
-            # category.created_date = timezone.now()
+            category.user = request.user
+            category.created_date = timezone.now()
             category.save()
             return redirect('categories_list')  # , pk=post.pk)
     else:
