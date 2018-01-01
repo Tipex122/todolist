@@ -126,3 +126,32 @@ def todo_checked(request, pk):
     return render(request, 'data/todo_edit.html', {'form': form})
 
 '''
+
+
+def get_todo_list(max_results=0, starts_with=''):
+    tod_list = []
+    if starts_with:
+        tod_list = Todo.objects.filter(todo_job__istartswith=starts_with)
+
+    if tod_list and max_results > 0:
+        if tod_list.count() > max_results:
+            tod_list = tod_list[:max_results]
+    print(tod_list)
+    return tod_list
+
+
+def suggest_todos(request):
+
+    # todos = []
+    print("================== Call to suggest_todos =================")
+    starts_with = ''
+    if request.method == 'GET':
+        starts_with = request.GET['suggestion']
+
+    todos = get_todo_list(8, starts_with)
+    print(todos)
+    nbr = todos.count()
+    context = {'todos': todos, 'nbr': nbr, }
+
+    return render(request, 'todos/todo_list.html', context)
+

@@ -47,6 +47,9 @@ urlpatterns = [
     # path('<int:pk>/category_edit/', views.category_edit, name='category_edit'),
     url(r'^category_edit/(?P<pk>[0-9]+)/$', todos_views.category_edit, name='category_edit'),
 
+    # used by jquery search
+    url(r'^suggest_todos/$', todos_views.suggest_todos, name='suggest_todos'),
+
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

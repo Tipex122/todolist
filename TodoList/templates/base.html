@@ -102,32 +102,49 @@
 
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="sidebar">
+            <ul class="nav nav-list">
+              <li class="nav-header">Find a Todo:</li>
+                <form>
+                  <label></label>
+                  <li>
+                    <input  class="search-query span10" type="text" name="suggestion" value="" id="suggestion" />
+                  </li>
+                </form>
+            </ul>
+          </div>
+          <div id="cats">
+          </div>
+          {% block sidebar %}  {% endblock sidebar %}
+        </div>
+        <div class="col-sm-9">
+          {% if messages %}
+              {% for message in messages %}
+                  <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+              {% endfor %}
+          {% endif %}
 
-      {% if messages %}
-          {% for message in messages %}
-              <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
-          {% endfor %}
-      {% endif %}
-
-      {% block content %}
-        {% if request.user.is_authenticated %}
-          <hr>
-          <p>Use this document as a way to quick start any new project.</p>
-          <hr>
-        {% else %}
-          <hr>
-          <div class="alert">You first have to sign in before any access to this site.</div>
-          <hr>
-        {% endif %}
-      {% endblock content %}
-
+          {% block content %}
+            {% if request.user.is_authenticated %}
+              <hr>
+              <p>Use this document as a way to quick start any new project.</p>
+              <hr>
+            {% else %}
+              <hr>
+              <div class="alert">You first have to sign in before any access to this site.</div>
+              <hr>
+            {% endif %}
+          {% endblock content %}
+        </div>
+      </div>
     </div> <!-- /container -->
 
     {% block modal %}{% endblock modal %}
 
-    <!-- Le javascript
-    ================================================== -->
+    <!-- Le javascript ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     {% block javascript %}
       <!-- Required by Bootstrap v4 beta -->
@@ -138,6 +155,7 @@
       <!-- Your stuff: Third-party javascript libraries go here -->
 
       <!-- place project specific Javascript in this file -->
+      <script src="{% static 'js/todo.js' %}"></script>
 
       <script src="{% static 'js/project.js' %}"></script>
 
