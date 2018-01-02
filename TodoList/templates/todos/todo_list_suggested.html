@@ -1,0 +1,17 @@
+{% block sidebar %}
+    {% if nbr %}
+        <p></p>
+      {% for todo in todos %}
+        <div >
+          <br>
+          <button id="todo_suggest_id" todo-id="{{todo.id}}" todo-title="{{todo.todo_job}}" class="todo-add btn btn-mini btn-info" type="button">
+            {{ todo.todo_job }}
+          </button>
+
+        </div>
+      {% endfor %}
+    {% else %}
+        <p>There is no Todo found</p>
+    {% endif %}
+{% endblock %}
+

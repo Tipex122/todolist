@@ -136,22 +136,29 @@ def get_todo_list(max_results=0, starts_with=''):
     if tod_list and max_results > 0:
         if tod_list.count() > max_results:
             tod_list = tod_list[:max_results]
-    print(tod_list)
     return tod_list
 
 
 def suggest_todos(request):
-
     # todos = []
-    print("================== Call to suggest_todos =================")
+    # print("================== Call to suggest_todos =================")
     starts_with = ''
     if request.method == 'GET':
         starts_with = request.GET['suggestion']
 
     todos = get_todo_list(8, starts_with)
-    print(todos)
+    # print(todos)
     nbr = todos.count()
     context = {'todos': todos, 'nbr': nbr, }
 
-    return render(request, 'todos/todo_list.html', context)
+    return render(request, 'todos/todo_list_suggested.html', context)
 
+
+def auto_add_todo(request):
+    print("================== Call to add_todo =================")
+    if request.method == 'GET':
+        todo_id = request.GET['todoname']
+        if todo_id:
+            todo = Todo.objects.get(id=int(todo_id))
+    context = {'todo': todo, }
+    return render(request, 'todos/todo_add_suggested.html', context)

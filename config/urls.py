@@ -49,8 +49,9 @@ urlpatterns = [
 
     # used by jquery search
     url(r'^suggest_todos/$', todos_views.suggest_todos, name='suggest_todos'),
+    url(r'^auto_add_todo/$', todos_views.auto_add_todo, name='auto_add_todo'),
 
-    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
