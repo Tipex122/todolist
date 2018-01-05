@@ -157,8 +157,11 @@ def suggest_todos(request):
 def auto_add_todo(request):
     print("================== Call to add_todo =================")
     if request.method == 'GET':
-        todo_id = request.GET['todoname']
-        if todo_id:
-            todo = Todo.objects.get(id=int(todo_id))
+        todo_id = request.GET['todo_id']
+        todo_name = request.GET['title']
+        if todo_id: #TODO: pas très robuste ce if ... et sinon si pas todo_id on fait quoi ?
+            # todo = Todo.objects.get(id=int(todo_id))
+            # soit on utilise todo_id soit on utilise todo_name mais pas les deux (peut servir : cf. todo.js)
+            todo = Todo.objects.get(todo_job=todo_name)
     context = {'todo': todo, }
     return render(request, 'todos/todo_add_suggested.html', context)
